@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trò Chơi Viết Số Cùng AI</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="ung-dung">
+      <section class="the the-tieu-de">
+        <h1>Học Viết Số Cùng AI</h1>
+        <p class="mo-ta">Bé hãy vẽ số theo yêu cầu để AI chấm điểm nhé!</p>
+        <p id="trangThaiAI" class="trang-thai-ai">Đang tải AI...</p>
+      </section>
+
+      <section class="the the-nhiem-vu">
+        <h2 id="mucTieuSo">Hãy viết số 0</h2>
+      </section>
+
+      <section class="the the-ve">
+        <div class="khu-ve-va-tuy-chon">
+          <div class="cot-trai">
+            <canvas id="bangVe" width="280" height="280" aria-label="Bảng vẽ số"></canvas>
+            <div class="nhom-nut">
+              <button id="nutXoa" type="button">Xóa</button>
+              <button id="nutChamDiem" type="button">AI Chấm Điểm</button>
+            </div>
+          </div>
+
+          <div class="cot-phai">
+            <div class="nhom-tuy-chon">
+              <label for="doDayBut">
+                Độ dày nét bút: <span id="hienThiDoDay">20</span>
+              </label>
+              <input id="doDayBut" class="thanh-do-day" type="range" min="8" max="36" value="20" />
+
+              <p class="tieu-de-mau">Chọn màu nét bút</p>
+              <div class="bang-mau" role="radiogroup" aria-label="Bảng màu nét bút">
+                <button class="nut-mau dang-chon" type="button" data-mau="#000000" aria-label="Màu đen"></button>
+                <button class="nut-mau" type="button" data-mau="#ff6b6b" aria-label="Màu đỏ"></button>
+                <button class="nut-mau" type="button" data-mau="#ffb703" aria-label="Màu cam"></button>
+                <button class="nut-mau" type="button" data-mau="#2a9d8f" aria-label="Màu xanh ngọc"></button>
+                <button class="nut-mau" type="button" data-mau="#3a86ff" aria-label="Màu xanh dương"></button>
+                <button class="nut-mau" type="button" data-mau="#9b5de5" aria-label="Màu tím"></button>
+              </div>
+            </div>
+            <div class="luoi-thong-ke thong-ke-mini">
+              <p><span>Tổng điểm:</span> <strong id="tongDiem">0.0</strong></p>
+              <p><span>Số lượng số đúng:</span> <strong id="soLanDung">0</strong></p>
+              <p><span>Số lượng số sai:</span> <strong id="soLanSai">0</strong></p>
+              <p><span>Độ chính xác trung bình:</span> <strong id="tbDoTinCay">0%</strong></p>
+            </div>
+            <p id="tongKetAI" class="tong-ket">Hãy bắt đầu để AI đánh giá nhé!</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="the the-bao-cao">
+        <h2>Báo Cáo AI</h2>
+        <div class="bao-cao-theo-so">
+          <h3>Báo cáo theo từng số</h3>
+          <div class="bang-bao-cao-scroll">
+            <table class="bang-bao-cao">
+              <thead>
+                <tr>
+                  <th>Số</th>
+                  <th>Lần viết đúng</th>
+                  <th>Lần viết sai</th>
+                  <th>Độ chính xác TB</th>
+                </tr>
+              </thead>
+              <tbody id="noiDungBaoCaoSo"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="nenPopupKetQua" class="nen-popup an-di">
+      <div id="popupKetQua" class="popup-ket-qua">
+        <h3 id="popupTieuDe">Tuyệt vời!</h3>
+        <p id="popupDuDoan">AI đoán số của bạn: -</p>
+        <p id="popupSoDung">Số đúng: -</p>
+        <p id="popupDiem">Điểm của bạn: -</p>
+        <button id="nutDongPopup" type="button">Con đã hiểu</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
