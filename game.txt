@@ -1,98 +1,98 @@
-MO TA GAME: HOC VIET SO CUNG AI
+MÔ TẢ GAME: HỌC VIẾT SỐ CÙNG AI
 
-1) MUC DICH DU AN
-- Xay dung mini-game giao duc cho tre em (4-7 tuoi) de luyen viet chu so tu 0 den 9.
-- Ung dung AI nhan dien chu so viet tay de tao phan hoi tuc thi va tang hung thu hoc tap.
-- Ho tro giao vien/phu huynh theo doi tien bo cua be thong qua cac chi so thong ke va bao cao theo tung so.
+1) MỤC ĐÍCH DỰ ÁN
+- Xây dựng mini-game giáo dục cho trẻ em (4-7 tuổi) để luyện viết chữ số từ 0 đến 9.
+- Ứng dụng AI nhận diện chữ số viết tay để tạo phản hồi tức thì và tăng hứng thú học tập.
+- Hỗ trợ giáo viên/phụ huynh theo dõi tiến bộ của bé thông qua các chỉ số thống kê và báo cáo theo từng số.
 
-2) CONG NGHE SU DUNG
-- Frontend: HTML, CSS, JavaScript (khong dung backend, khong framework).
-- AI: TensorFlow.js, tai model local tai duong dan ./model/model.json.
-- Model weights: ./model/group1-shard1of1.bin.
-- Chay truc tiep tren trinh duyet qua local server, co the deploy tren Vercel va embed vao Google Sites.
+2) CÔNG NGHỆ SỬ DỤNG
+- Frontend: HTML, CSS, JavaScript (không dùng backend, không framework).
+- AI: TensorFlow.js, tải model local tại đường dẫn `./model/model.json`.
+- Model weights: `./model/group1-shard1of1.bin`.
+- Chạy trực tiếp trên trình duyệt qua local server, có thể deploy trên Vercel và embed vào Google Sites.
 
-3) CACH GAME HOAT DONG
-- He thong random so muc tieu (0-9): "Hay viet so X".
-- Be ve so tren canvas bang chuot (hoac but cam ung tren thiet bi ho tro).
-- Co net dut goi y de be biet hinh dang so can viet.
-- Nut "Xoa" de ve lai.
-- Nut "AI Cham Diem" de gui bai ve cho AI danh gia.
+3) CÁCH GAME HOẠT ĐỘNG
+- Hệ thống random số mục tiêu (0-9): "Hãy viết số X".
+- Bé vẽ số trên canvas bằng chuột (hoặc bút cảm ứng trên thiết bị hỗ trợ).
+- Có nét đứt gợi ý để bé biết hình dáng số cần viết.
+- Nút "Xóa" để vẽ lại.
+- Nút "AI Chấm Điểm" để gửi bài vẽ cho AI đánh giá.
 
-4) CACH SU DUNG AI
-4.1 Tai model
-- Khi mo game, he thong tai model TensorFlow.js tu file local.
-- Trang thai hien thi:
-  + "Dang tai AI..."
-  + "AI da san sang!"
+4) CÁCH SỬ DỤNG AI
+4.1 Tải model
+- Khi mở game, hệ thống tải model TensorFlow.js từ file local.
+- Trạng thái hiển thị:
+  + "Đang tải AI..."
+  + "AI đã sẵn sàng!"
 
-4.2 Tien xu ly anh (tuong thich MNIST)
-- Lay anh tu canvas cua be.
-- Resize ve 28x28.
-- Chuyen xam (grayscale).
-- Chuyen sang gia tri 0-1 bang chuan hoa.
-- Tao tensor dau vao co shape [1, 28, 28, 1].
+4.2 Tiền xử lý ảnh (tương thích MNIST)
+- Lấy ảnh từ canvas của bé.
+- Resize về 28x28.
+- Chuyển xám (grayscale).
+- Chuyển sang giá trị 0-1 bằng chuẩn hóa.
+- Tạo tensor đầu vào có shape [1, 28, 28, 1].
 
-4.3 Du doan
-- AI tra ve xac suat cho 10 lop so (0-9).
-- So du doan la lop co xac suat lon nhat.
-- Do tin cay la gia tri xac suat lon nhat (phan tram %).
+4.3 Dự đoán
+- AI trả về xác suất cho 10 lớp số (0-9).
+- Số dự đoán là lớp có xác suất lớn nhất.
+- Độ tin cậy là giá trị xác suất lớn nhất (phần trăm %).
 
-5) CACH CHAM DIEM
-- Neu AI doan dung so muc tieu:
-  + Diem lan nay = Do tin cay / 10
-  + Vi du 87% => 8.7 diem
-- Neu AI doan sai so muc tieu:
-  + Diem lan nay = 0
-- Ket qua hien thi bang popup giua man hinh:
-  + Thong diep: "Tuyet voi!" hoac "Sap duoc roi, thu lai nhe!"
-  + AI doan so cua ban
-  + So dung
-  + Diem cua ban
+5) CÁCH CHẤM ĐIỂM
+- Nếu AI đoán đúng số mục tiêu:
+  + Điểm lần này = Độ tin cậy / 10
+  + Ví dụ 87% => 8.7 điểm
+- Nếu AI đoán sai số mục tiêu:
+  + Điểm lần này = 0
+- Kết quả hiển thị bằng popup giữa màn hình:
+  + Thông điệp: "Tuyệt vời!" hoặc "Sắp được rồi, thử lại nhé!"
+  + AI đoán số của bạn
+  + Số đúng
+  + Điểm của bạn
 
-6) LOGIC THONG KE TONG QUAN
-- Tong diem: tong diem tat ca cac lan cham.
-- So luong so dung: tong so lan ve dung muc tieu.
-- So luong so sai: tong so lan ve sai muc tieu.
-- Do chinh xac trung binh (tong quan):
-  + Chi tinh tren cac lan dung
-  + Cong thuc: tong do tin cay cac lan dung / so lan dung
-- Cau khich le:
-  + Duoc sinh dua tren ty le dung va do chinh xac trung binh.
+6) LOGIC THỐNG KÊ TỔNG QUAN
+- Tổng điểm: tổng điểm tất cả các lần chấm.
+- Số lượng số đúng: tổng số lần vẽ đúng mục tiêu.
+- Số lượng số sai: tổng số lần vẽ sai mục tiêu.
+- Độ chính xác trung bình (tổng quan):
+  + Chỉ tính trên các lần đúng
+  + Công thức: tổng độ tin cậy các lần đúng / số lần đúng
+- Câu khích lệ:
+  + Được sinh dựa trên tỷ lệ đúng và độ chính xác trung bình.
 
-7) LOGIC REPORT THEO TUNG SO (0-9)
-Moi so co cac chi so:
-- Lan viet dung
-- Lan viet sai
-- Tong so lan cham cua so do
-- Tong do chinh xac de tinh trung binh theo quy tac:
-  + Lan dung: cong do tin cay AI
-  + Lan sai: cong 0
+7) LOGIC REPORT THEO TỪNG SỐ (0-9)
+Mỗi số có các chỉ số:
+- Lần viết đúng
+- Lần viết sai
+- Tổng số lần chấm của số đó
+- Tổng độ chính xác để tính trung bình theo quy tắc:
+  + Lần đúng: cộng độ tin cậy AI
+  + Lần sai: cộng 0
 
-Cong thuc do chinh xac TB tung so:
-- Do chinh xac TB = tong do chinh xac / tong so lan cham cua so do
+Công thức độ chính xác TB từng số:
+- Độ chính xác TB = tổng độ chính xác / tổng số lần chấm của số đó
 
-Vi du:
-- So 3 duoc cham 4 lan:
-  + Dung 2 lan voi 90% va 70%
-  + Sai 2 lan => 0 va 0
-  + Do chinh xac TB = (90 + 70 + 0 + 0) / 4 = 40%
+Ví dụ:
+- Số 3 được chấm 4 lần:
+  + Đúng 2 lần với 90% và 70%
+  + Sai 2 lần => 0 và 0
+  + Độ chính xác TB = (90 + 70 + 0 + 0) / 4 = 40%
 
-8) QUY TAC TO MAU BANG BAO CAO
-- Cot "Lan viet dung":
-  + >= 1 => mau xanh
-- Cot "Lan viet sai":
-  + >= 1 => mau do
-- Cot "Do chinh xac TB":
-  + > 50 => mau xanh
-  + < 50 => mau do
-  + = 50 => mau mac dinh
-  + Neu 0.0% nhung chua co du lieu (chua cham lan nao) => giu mau mac dinh
+8) QUY TẮC TÔ MÀU BẢNG BÁO CÁO
+- Cột "Lần viết đúng":
+  + >= 1 => màu xanh
+- Cột "Lần viết sai":
+  + >= 1 => màu đỏ
+- Cột "Độ chính xác TB":
+  + > 50 => màu xanh
+  + < 50 => màu đỏ
+  + = 50 => màu mặc định
+  + Nếu 0.0% nhưng chưa có dữ liệu (chưa chấm lần nào) => giữ màu mặc định
 
-9) GIA TRI GIAO DUC
-- Tre duoc luyen viet so bang hoat dong truc quan (ve tay).
-- Nhan phan hoi nhanh, de hieu, tao dong luc hoc.
-- Co theo doi tien bo theo tung so de tap trung luyen cac so yeu.
+9) GIÁ TRỊ GIÁO DỤC
+- Trẻ được luyện viết số bằng hoạt động trực quan (vẽ tay).
+- Nhận phản hồi nhanh, dễ hiểu, tạo động lực học.
+- Có theo dõi tiến bộ theo từng số để tập trung luyện các số yếu.
 
-10) KET LUAN
-- Game dat muc tieu ket hop hoc viet so va AI trong mot san pham nhe, de trien khai.
-- Kien truc front-end thuan, de mo rong them am thanh, animation, badge thuong, hoac luu lich su hoc tap trong cac phien ban tiep theo.
+10) KẾT LUẬN
+- Game đạt mục tiêu kết hợp học viết số và AI trong một sản phẩm nhẹ, dễ triển khai.
+- Kiến trúc front-end thuần, dễ mở rộng thêm âm thanh, animation, badge thưởng, hoặc lưu lịch sử học tập trong các phiên bản tiếp theo.
